@@ -1,14 +1,16 @@
 -- Table definitions for the tournament project.
 --
--- Put your SQL 'create table' statements in this file; also 'create view'
--- statements if you choose to use it.
---
--- You can write comments in this file by starting them with two dashes, like
--- these lines here.
+-- TABLE players: list of registered players with their names and id.
 
 CREATE TABLE players (id serial primary key, name text);
 
+-- TABLE games: list of games played with a unique id for each game, the winner and the loser of the game.
+-- The winner and loser are ids from the players table.
+
 CREATE TABLE games (id serial primary key, winner integer, loser integer);
+
+-- VIEW gamewins: list player's id, name, the total number of wins and the total number of games the players has played.
+-- The list is ordered by the player with the largest wins to the smallest number of wins.
 
 CREATE VIEW gamewins AS
 	SELECT totalgames.id as id,
