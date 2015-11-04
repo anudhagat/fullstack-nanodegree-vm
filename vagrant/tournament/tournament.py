@@ -13,14 +13,30 @@ def connect():
 
 def deleteMatches():
     """Remove all the match records from the database."""
+    connection = connect()
+    cursor = connection.cursor()
+    cursor.execute("delete from games;")
+    connection.commit()
+    connection.close()
 
 
 def deletePlayers():
     """Remove all the player records from the database."""
+    connection = connect()
+    cursor = connection.cursor()
+    cursor.execute("delete from players;")
+    connection.commit()
+    connection.close()
 
 
 def countPlayers():
     """Returns the number of players currently registered."""
+    connection = connect()
+    cursor = connection.cursor()
+    cursor.execute("select count(*) from players;")
+    result = cursor.fetchone()
+    connection.close()
+    return result[0]
 
 
 def registerPlayer(name):
@@ -32,6 +48,11 @@ def registerPlayer(name):
     Args:
       name: the player's full name (need not be unique).
     """
+    connection = connect()
+    cursor = connection.cursor()
+    cursor.execute("insert into players values (default, %s);", (name,))
+    connection.commit()
+    connection.close()
 
 
 def playerStandings():
@@ -47,6 +68,12 @@ def playerStandings():
         wins: the number of matches the player has won
         matches: the number of matches the player has played
     """
+    connection = connect()
+    cursor = connection.cursor()
+    cursor.execute("select * from gamewins;")
+    result = cursor.fetchall()
+    connection.close()
+    return result
 
 
 def reportMatch(winner, loser):
@@ -56,6 +83,11 @@ def reportMatch(winner, loser):
       winner:  the id number of the player who won
       loser:  the id number of the player who lost
     """
+    connection = connect()
+    cursor = connection.cursor()
+    cursor.execute("insert into games values (default, %s, %s);", (winner,loser,))
+    connection.commit()
+    connection.close()
  
  
 def swissPairings():
@@ -73,5 +105,11 @@ def swissPairings():
         id2: the second player's unique id
         name2: the second player's name
     """
-
+    pairings =[]
+    standings = playerStandings()
+    for player in range(0,len(standings),2):
+        pairings.append((standings[player][0],standings[player][1],
+                         standings[player+1][0],standings[player+1][1]));
+    return pairings
+        
 

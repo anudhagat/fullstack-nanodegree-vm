@@ -136,4 +136,7 @@ if __name__ == '__main__':
     testPairings()
     print "Success!  All tests pass!"
 
+testDeleteMatches()
 
+
+    
