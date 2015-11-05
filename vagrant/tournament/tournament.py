@@ -35,6 +35,7 @@ def countPlayers():
     cursor = connection.cursor()
     cursor.execute("select count(*) from players;")
     result = cursor.fetchone()
+    connection.commit()
     connection.close()
     return result[0]
 
@@ -72,6 +73,7 @@ def playerStandings():
     cursor = connection.cursor()
     cursor.execute("select * from gamewins;")
     result = cursor.fetchall()
+    connection.commit()
     connection.close()
     return result
 
