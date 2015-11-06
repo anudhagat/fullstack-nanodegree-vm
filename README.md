@@ -7,16 +7,19 @@ How to Download:
 Requirements:
 Python 2.7 installed on your computer.
 PostgreSQL (psql)
-Virtual Box.
+Virtual Box
 Vagrant
 
 Using your web browser, go to https://github.com/anudhagat/fullstack-nanodegree-vm. On the right hand side, in the middle of the page, click the download button to get a zipped version of this project on your computer. Unzip this file on your computer.
 
 How to Run:
 -----------
-Open psql from the command prompt. Run the command "\i tournament.sql". This will create the "players" and "games" tables in the tournament database and a database view called "gamewins". Exit psql using \q command.
+Using your command shell, go to the vagrant/tournament folder of the unzipped project on your computer.
+At the command prompt, run the command to set up the database:
+psql -f tournament.sql
 
-At the command prompt, run the file tournament_test.py (in the vagrant/tournament directory of your unzipped folder) using the command: python tournament_test.py
+At the command prompt, run the file tournament_test.py using the command:
+python tournament_test.py
 
 Expected Result:
 ----------------
